@@ -6,7 +6,7 @@ window.addEventListener('DOMContentLoaded', function() {
     var currentDate = new Date();
     var formattedDateTime = currentDate.toLocaleString();
     datetimeElement.textContent = formattedDateTime;
-  }
+    }
 
   // Initial call to display date and time
   updateDateTime();
