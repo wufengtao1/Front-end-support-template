@@ -1,38 +1,9 @@
-/* styles.css */
+/* CSS styles go here */
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-header, nav, main, footer {
-  margin: 20px;
+    background-color: lightblue;
+    font-family: Arial, sans-serif;
 }
 
 h1 {
-  color: #333;
-}
-
-nav ul {
-  list-style: none;
-  padding: 0;
-}
-
-nav li {
-  display: inline-block;
-  margin-right: 10px;
-}
-
-nav a {
-  text-decoration: none;
-  color: #333;
-}
-
-section {
-  margin-bottom: 20px;
-}
-
-footer {
-  text-align: center;
-  color: #777;
+    color: darkblue;
 }
