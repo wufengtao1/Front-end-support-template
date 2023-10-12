@@ -5,19 +5,16 @@ module HelloBlockchain::message {
     use aptos_framework::account;
     use aptos_std::event;
 
-//:!:>resource
     struct MessageHolder has key {
         message: string::String,
         message_change_events: event::EventHandle<MessageChangeEvent>,
     }
-//<:!:resource
 
     struct MessageChangeEvent has drop, store {
         from_message: string::String,
         to_message: string::String,
     }
 
-    /// There is no message present
     const ENO_MESSAGE: u64 = 0;
 
     public fun get_message(addr: address): string::String acquires MessageHolder {
@@ -25,9 +22,9 @@ module HelloBlockchain::message {
         *&borrow_global<MessageHolder>(addr).message
     }
 
-    public entry fun set_message(account: signer, message: string::String)
-    acquires MessageHolder {
+    public entry fun set_message(account: signer, message: string::String) acquires MessageHolder {
         let account_addr = signer::address_of(&account);
+
         if (!exists<MessageHolder>(account_addr)) {
             move_to(&account, MessageHolder {
                 message,
@@ -48,11 +45,7 @@ module HelloBlockchain::message {
     public entry fun sender_can_set_message(account: signer) acquires MessageHolder {
         let addr = signer::address_of(&account);
         aptos_framework::account::create_account_for_test(addr);
-        set_message(account,  string::utf8(b"Hello, Blockchain"));
-
-        assert!(
-          get_message(addr) == string::utf8(b"Hello, Blockchain"),
-          ENO_MESSAGE
-        );
+        set_message(account, string::utf8(b"Hello, Blockchain"));
+        assert!(get_message(addr) == string::utf8(b"Hello, Blockchain"), ENO_MESSAGE);
     }
 }
